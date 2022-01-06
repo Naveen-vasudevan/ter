@@ -5,9 +5,9 @@ env:
     TERRAFORM_VERSION: "0.15.3"
     #TF_COMMAND: "apply"
     #TF_COMMAND: "destroy"
- # parameter-store:
-   # AWS_ACCESS_KEY_ID: "access_key_id"
-   # AWS_SECRET_ACCESS_KEY: "secret_key"
+  parameter-store:
+   AWS_ACCESS_KEY_ID: "access_key_id"
+   AWS_SECRET_ACCESS_KEY: "secret_key"
 
 phases:
   install:
