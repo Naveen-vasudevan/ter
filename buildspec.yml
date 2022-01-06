@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     TERRAFORM_VERSION: "0.15.3"
-    #TF_COMMAND: "apply"
+    TF_COMMAND: "apply"
     #TF_COMMAND: "destroy"
   parameter-store:
     AWS_ACCESS_KEY_ID: "access_key_id"
@@ -30,8 +30,8 @@ phases:
       - ls -lrt "$CODEBUILD_SRC_DIR/terraform-manifest"
       - terraform --version
       - terraform init 
-                
-      - terraform apply -auto-approve
+      - terraform plan -lock=false -input=false        
+      - terraform $TF_COMMAND -input=false -auto-approve 
   post_build:
     on-failure: CONTINUE   
     commands:
