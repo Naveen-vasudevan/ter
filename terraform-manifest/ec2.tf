@@ -5,22 +5,27 @@ provider "aws" {
   secret_key = "Ba1pZ7ufDLljYQjMghDqUPK226aF2358EriCjs8O"
 }
 
+terraform {
+    required_version = "~> 1.0"
+    required_providers {
+        aws = {
+         source = "hashicorp/aws"
+         version = "~> 3.0"
 
-module "ec2_instance" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 3.0"
+        }
+    }
+}
 
-  name = "single-instance"
+#provider "aws" {
+ # profile = "default" # AWS Credentials Profile configured on your local desktop terminal  $HOME/.aws/credentials
+ # region  = "us-east-1"
+#}
 
-  ami                    = "ami-052cef05d01020f1d"
-  instance_type          = "t2.micro"
- # key_name               = "user1"
- # monitoring             = true
- # vpc_security_group_ids = ["sg-12345678"]
- # subnet_id              = "subnet-eddcdzz4"
-
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
+resource "aws_instance" "web-app" {
+ ami = "ami-052cef05d01020f1d"
+ instance_type = "t2.micro"
+# availability_zone = "us-east-1b"
+ tags = {
+     Name = "webserver-01"
+ }
 }
